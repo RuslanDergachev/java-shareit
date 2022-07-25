@@ -71,8 +71,8 @@ public class ItemStorage implements ItemRepository {
     @Override
     public ItemDto updateItem(long userId, long itemId, Item item) {
         if (!items.containsKey(userId)) {
-            log.error("У пользователя нет вещей");
-            throw new NotFoundException("ID пользователя неверный");
+            log.info("У пользователя нет вещей");
+            throw new NotFoundException("У пользователя нет вещей");
         }
         Item newItem = null;
         for (Item i : items.get(userId)) {
@@ -87,12 +87,17 @@ public class ItemStorage implements ItemRepository {
                     i.setAvailable(item.getAvailable());
                 }
                 newItem = i;
+                break;
             }
         }
+        if(newItem == null){
+            log.info("Вещь не найдена");
+            throw new NotFoundException("Вещь не найдена");
+        }
         log.info("Вещь ID# "+itemId+" обновлена");
-        assert newItem != null;
         return ItemMapper.toItemDto(newItem);
     }
+
     public List<ItemDto> searchItem(String search) {
         List<ItemDto> resultSearchItem = new ArrayList<>();
         for (Item item : getListItems()) {

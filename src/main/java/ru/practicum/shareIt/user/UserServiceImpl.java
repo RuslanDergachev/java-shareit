@@ -25,9 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public User createUser(User user) throws IOException {
-        if (user.getName()== null || user.getEmail()== null) {
-            log.error("Имя пользователя или email отсутствуют");
-            throw new ValidationException("Нет имени или адреса почты");
+        if (user.getName()== null) {
+            log.info("Имя пользователя отсутствует");
+            throw new ValidationException("Нет имени пользователя");
+        }
+        if (user.getEmail()== null) {
+            log.info("У пользователя отсутствует email");
+            throw new ValidationException("Нет адреса почты пользователя");
         }
         userRepository.createUser(user);
         return user;
@@ -35,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     public User updateUser(long userId, User user) {
         if (userId <= 0) {
-            log.error("ID пользователя равен 0");
+            log.info("ID пользователя равен 0");
             throw new NullPointerException("ID пользователя равен 0");
         }
         return userRepository.updateUser(userId, user);
@@ -47,8 +51,8 @@ public class UserServiceImpl implements UserService {
 
     public void removeUser(long userId) {
         if (userId <= 0) {
-            log.error("ID пользователя равен 0");
-            throw new NullPointerException("ID меньше или равно 0");
+            log.info("ID пользователя равен 0");
+            throw new NullPointerException("ID пользователя меньше или равно 0");
         }
         userRepository.removeUser(userId);
     }

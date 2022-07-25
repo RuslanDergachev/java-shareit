@@ -21,7 +21,7 @@ public class UserStorage implements UserRepository {
     public User createUser(User user) throws IOException {
         for(User u: users.values()) {
             if (u.getEmail().equals(user.getEmail())) {
-                log.error("Пользователь уже существует");
+                log.info("Пользователь уже существует");
                 throw new IOException("Такой пользователь уже существует");
             }
         }
@@ -48,7 +48,7 @@ public class UserStorage implements UserRepository {
         } else {
             for (User userMail : users.values()) {
                 if (userMail.getEmail().equals(user.getEmail())) {
-                    log.error("email уже существует");
+                    log.info("Email уже существует");
                     throw new IllegalArgumentException("Email уже существует");
                 }
             }
@@ -57,6 +57,7 @@ public class UserStorage implements UserRepository {
             newUser.setEmail(user.getEmail());
         }
         users.put(userId, newUser);
+        log.info("Обновлены данные пользователя ID# " + userId);
         return users.get(userId);
     }
 
