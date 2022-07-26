@@ -4,45 +4,36 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import ru.practicum.shareIt.exception.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
 public class ItemStorage implements ItemRepository {
-
     private final HashMap<Long, List<Item>> items = new HashMap<>();
     private long id;
 
     @Override
     public List<ItemDto> findByUserId(long userId) {
-        List<ItemDto> itemList = new ArrayList<>();
-        for (Item item : items.get(userId)) {
-            itemList.add(ItemMapper.toItemDto(item));
-        }
-        return itemList;
+        return items.get(userId).stream()
+                .map(ItemMapper::toItemDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Item> getListItems() {
-        List<Item> allItems = new ArrayList<>();
-        for (List<Item> item : items.values()) {
-            allItems.addAll(item);
-        }
-        return allItems;
+        return items.values().stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ItemDto getItemById(long itemId) {
-        for (List<Item> items: items.values()){
-            for (Item item: items) {
-                if (item.getId() == itemId) {
-                    return ItemMapper.toItemDto(item);
-                }
-            }
-        }
-        return null;
+    public Optional<ItemDto> getItemById(long itemId) {
+        return items.values().stream()
+                .flatMap(Collection::stream)
+                .filter(item -> item.getId() == itemId)
+                .findFirst()
+                .map(ItemMapper::toItemDto);
     }
 
     @Override
@@ -64,7 +55,7 @@ public class ItemStorage implements ItemRepository {
         for (Item item : items.get(userId)) {
             if (item.getId() == itemId) {
                 items.remove(item);
-                log.info("Вещь ID# "+itemId+" удалена");
+                log.info("Вещь ID# {} удалена", itemId);
             }
         }
     }
@@ -96,7 +87,7 @@ public class ItemStorage implements ItemRepository {
             log.info("Вещь не найдена");
             throw new NotFoundException("Вещь не найдена");
         }
-        log.info("Вещь ID# "+itemId+" обновлена");
+        log.info("Вещь ID# {} обновлена", itemId);
         return ItemMapper.toItemDto(newItem);
     }
 

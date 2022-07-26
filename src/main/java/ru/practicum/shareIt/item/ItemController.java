@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -34,7 +35,7 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public ItemDto getItemById(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId) {
+    public Optional<ItemDto> getItemById(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId) {
         log.debug("Получен запрос вещи по ID");
         return itemService.getItemById(userId, itemId);
     }

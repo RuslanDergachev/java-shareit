@@ -3,8 +3,8 @@ package ru.practicum.shareIt.user;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import ru.practicum.shareIt.exception.ConflictException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +18,11 @@ public class UserStorage implements UserRepository {
 
     private long id;
 
-    public User createUser(User user) throws IOException {
+    public User createUser(User user) {
         for(User u: users.values()) {
             if (u.getEmail().equals(user.getEmail())) {
                 log.info("Пользователь уже существует");
-                throw new IOException("Такой пользователь уже существует");
+                throw new ConflictException("Такой пользователь уже существует");
             }
         }
         user.setId(++id);
@@ -46,8 +46,8 @@ public class UserStorage implements UserRepository {
         if(user.getName()!= null) {
             newUser.setName(user.getName());
         } else {
-            for (User userMail : users.values()) {
-                if (userMail.getEmail().equals(user.getEmail())) {
+            for (User user1 : users.values()) {
+                if (user1.getEmail().equals(user.getEmail())) {
                     log.info("Email уже существует");
                     throw new IllegalArgumentException("Email уже существует");
                 }

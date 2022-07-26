@@ -8,7 +8,7 @@ public interface UserRepository {
 
     Optional<User> findUserById(long userId);
 
-    User createUser(User user) throws IOException;
+    User createUser(User user);
 
     User updateUser(long userId, User user);
 

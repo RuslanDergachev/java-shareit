@@ -10,7 +10,7 @@ public interface UserService {
 
     User getUser(long userId);
 
-    User createUser(User user) throws IOException;
+    User createUser(User user);
 
     User updateUser(long userId, User user);
 

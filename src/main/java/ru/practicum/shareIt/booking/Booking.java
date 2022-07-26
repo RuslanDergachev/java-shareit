@@ -5,11 +5,11 @@ import java.util.Date;
 
 @Data
 public class Booking {
-    long id;
-    Date start;
-    Date end;
-    String item;
-    long booker;
-    BookingStatus status;
+    private long id;
+    private Date start;
+    private Date end;
+    private String item;
+    private long booker;
+    private BookingStatus status;
 
 }

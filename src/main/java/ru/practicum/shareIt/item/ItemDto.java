@@ -7,11 +7,11 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class ItemDto {
-    long id;
+    private long id;
     @NotBlank
-    String name;
-    String description;
-    Boolean available;
+    private String name;
+    private String description;
+    private Boolean available;
 
 
     public ItemDto(long id, String name, String description, Boolean available) {

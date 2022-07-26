@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public User createUser(User user) throws IOException {
+    public User createUser(User user) {
         if (user.getName()== null) {
             log.info("Имя пользователя отсутствует");
             throw new ValidationException("Нет имени пользователя");
