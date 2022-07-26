@@ -20,17 +20,17 @@ public class ItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Item add(@RequestHeader("X-Sharer-User-Id") long userId,
-                    @Valid @RequestBody Item item) {
-        log.debug("Добавлена вещь: {}", item);
-        return itemService.addNewItem(userId, item);
+    public ItemDto add(@RequestHeader("X-Sharer-User-Id") long userId,
+                    @Valid @RequestBody ItemDto itemDto) {
+        log.debug("Добавлена вещь: {}", itemDto);
+        return itemService.addNewItem(userId, itemDto);
     }
 
     @PatchMapping("/{itemId}")
     public ItemDto update(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId,
-                       @RequestBody Item item){
-        log.debug("Обновлена вещь: {}", item);
-        return itemService.updateItem(userId, itemId, item);
+                       @RequestBody ItemDto itemDto){
+        log.debug("Обновлена вещь: {}", itemDto);
+        return itemService.updateItem(userId, itemId, itemDto);
     }
 
     @GetMapping("/{itemId}")

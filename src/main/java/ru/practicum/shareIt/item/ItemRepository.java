@@ -5,7 +5,7 @@ import java.util.List;
 public interface ItemRepository {
     List<ItemDto> findByUserId(long userId);
 
-    Item save(long userId, Item item);
+    ItemDto save(long userId, ItemDto itemDto);
 
     List<Item> getListItems();
 
@@ -13,7 +13,7 @@ public interface ItemRepository {
 
     void deleteByUserIdAndItemId(long userId, long itemId);
 
-    ItemDto updateItem(long userId, long itemId, Item item);
+    ItemDto updateItem(long userId, long itemId, ItemDto itemDto);
 
     List<ItemDto> searchItem(String search);
 }

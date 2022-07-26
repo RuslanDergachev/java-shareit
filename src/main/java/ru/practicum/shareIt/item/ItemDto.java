@@ -11,10 +11,10 @@ public class ItemDto {
     @NotBlank
     String name;
     String description;
-    boolean available;
+    Boolean available;
 
 
-    public ItemDto(long id, String name, String description, boolean available) {
+    public ItemDto(long id, String name, String description, Boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;

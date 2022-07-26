@@ -6,11 +6,11 @@ import java.util.List;
 
 @Service
 public interface ItemService {
-    Item addNewItem(long userId, Item item);
+    ItemDto addNewItem(long userId, ItemDto itemDto);
 
     List<ItemDto> getItems(long userId);
 
-    ItemDto updateItem(long userId, long itemId, Item item);
+    ItemDto updateItem(long userId, long itemId, ItemDto itemDto);
 
     ItemDto getItemById(long userId, long itemId);
 

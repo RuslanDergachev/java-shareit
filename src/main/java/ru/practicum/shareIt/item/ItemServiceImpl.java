@@ -23,23 +23,23 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item addNewItem(long userId, Item item) {
+    public ItemDto addNewItem(long userId, ItemDto itemDto) {
         if (userId <=0 || userService.getUser(userId) == null){
             throw new NullPointerException("ID меньше или равно 0");
         }
-        if(item.getName() == null || item.getName().isEmpty()){
+        if(itemDto.getName() == null || itemDto.getName().isEmpty()){
             log.info("Нет наименования вещи");
             throw new ValidationException("Нет наименования вещи");
         }
-        if(item.getDescription() == null){
+        if(itemDto.getDescription() == null){
             log.info("Нет описания вещи");
             throw new ValidationException("Нет описания вещи");
         }
-        if (item.getAvailable() == null){
+        if (itemDto.getAvailable() == null){
             log.info("Нет статуса доступности вещи");
             throw new ValidationException("Отсутствует статус доступности вещи");
         }
-        return itemRepository.save(userId, item);
+        return itemRepository.save(userId, itemDto);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public ItemDto updateItem(long userId, long itemId, Item item) {
+    public ItemDto updateItem(long userId, long itemId, ItemDto itemDto) {
         if (userId <=0){
             log.info("ID пользователя равно 0");
             throw new NotFoundException("ID пользователя меньше или равно 0");
@@ -95,6 +95,6 @@ public class ItemServiceImpl implements ItemService{
             log.info("Пользователь \"+userId+\" не существует");
             throw new NotFoundException("Пользователь "+userId+" не существует");
         }
-        return itemRepository.updateItem(userId, itemId, item);
+        return itemRepository.updateItem(userId, itemId, itemDto);
     }
 }
