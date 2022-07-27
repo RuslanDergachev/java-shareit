@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemService{
         return itemRepository.searchItem(search);
     }
 
-    public Optional<ItemDto> getItemById(long userId, long itemId){
+    public ItemDto getItemById(long userId, long itemId){
         if (userId <= 0 & itemId <= 0){
             log.info("ID равно 0");
             throw new FalseIdException("ID меньше или равно 0");

@@ -28,12 +28,14 @@ public class ItemStorage implements ItemRepository {
     }
 
     @Override
-    public Optional<ItemDto> getItemById(long itemId) {
+    public ItemDto getItemById(long itemId) {
         return items.values().stream()
                 .flatMap(Collection::stream)
                 .filter(item -> item.getId() == itemId)
                 .findFirst()
-                .map(ItemMapper::toItemDto);
+                .stream()
+                .map(ItemMapper::toItemDto)
+                .findAny().orElse(null);
     }
 
     @Override

@@ -10,7 +10,7 @@ public interface ItemRepository {
 
     List<Item> getListItems();
 
-    Optional<ItemDto> getItemById(long itemId);
+    ItemDto getItemById(long itemId);
 
     void deleteByUserIdAndItemId(long userId, long itemId);
 

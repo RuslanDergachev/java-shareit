@@ -13,7 +13,7 @@ public interface ItemService {
 
     ItemDto updateItem(long userId, long itemId, ItemDto itemDto);
 
-    Optional<ItemDto> getItemById(long userId, long itemId);
+    ItemDto getItemById(long userId, long itemId);
 
     List<ItemDto> searchItem(long userId, String searchItem);
 
