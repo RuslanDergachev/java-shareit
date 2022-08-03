@@ -1,10 +1,17 @@
 package ru.practicum.shareIt.user;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.practicum.shareIt.exception.ConflictException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,11 +19,15 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+@Repository
 public class UserStorage implements UserRepository {
 
     private final HashMap<Long, User> users = new HashMap<>();
 
+    @PersistenceContext
+    private EntityManager entityManager;
     private long id;
+
 
     public User createUser(User user) {
         for(User u: users.values()) {
@@ -69,6 +80,16 @@ public class UserStorage implements UserRepository {
     @Override
     public List<User> getUsers() {
         return new ArrayList<>(users.values());
+    }
+
+    @Override
+    public List<User> findAll() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cr = cb.createQuery(User.class);
+        Root<User> root = cr.from(User.class);
+        cr.select(root);
+        List<User> foundUsers = entityManager.createQuery(cr).getResultList();
+        return foundUsers;
     }
 
     public UserDto getUser(long userId){

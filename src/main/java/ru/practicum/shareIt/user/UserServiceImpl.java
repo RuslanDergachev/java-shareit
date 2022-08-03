@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareIt.exception.NotFoundException;
 import ru.practicum.shareIt.exception.ValidationException;
 
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User createUser(User user) {
-        if (user.getName()== null) {
+        if (user.getName() == null) {
             log.info("Имя пользователя отсутствует");
             throw new ValidationException("Нет имени пользователя");
         }

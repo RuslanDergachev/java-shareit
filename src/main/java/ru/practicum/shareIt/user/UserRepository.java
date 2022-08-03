@@ -1,8 +1,9 @@
 package ru.practicum.shareIt.user;
 
-import java.io.IOException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+
 
 public interface UserRepository {
 
@@ -15,4 +16,6 @@ public interface UserRepository {
     void removeUser(long userId);
 
     List<User> getUsers();
+
+    List<User> findAll();
 }
