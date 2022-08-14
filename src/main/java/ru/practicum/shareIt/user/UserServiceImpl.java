@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             log.info("У пользователя отсутствует email");
             throw new ValidationException("Нет адреса почты пользователя");
         }
-        userRepository.saveAndFlush(user);
+        userRepository.save(user);
         return user;
     }
 

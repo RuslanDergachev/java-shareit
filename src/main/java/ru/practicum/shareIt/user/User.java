@@ -3,6 +3,7 @@ package ru.practicum.shareIt.user;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -25,6 +26,7 @@ public class User {
     private String name;
     @Email
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Override
