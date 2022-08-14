@@ -1,0 +1,285 @@
+2022-08-14 14:46:27 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-08-14 17:46:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into public.users (email, name) values (?, ?) [42104-214]
+2022-08-14 17:46:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into public.users (email, name) values (?, ?) [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into public.users (email, name) values (?, ?) [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into public.users (email, name) values (?, ?) [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_, user0_.email as email2_4_, user0_.name as name3_4_ from public.users user0_ [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:46:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ [42104-214]
+2022-08-14 17:47:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where upper(item0_.name) like upper(('%'||?||'%')) or (upper(item0_.description) like upper(('%'||?||'%'))) and item0_.is_available=true [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where upper(item0_.name) like upper(('%'||?||'%')) or (upper(item0_.description) like upper(('%'||?||'%'))) and item0_.is_available=true [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where upper(item0_.name) like upper(('%'||?||'%')) or (upper(item0_.description) like upper(('%'||?||'%'))) and item0_.is_available=true [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where upper(item0_.name) like upper(('%'||?||'%')) or (upper(item0_.description) like upper(('%'||?||'%'))) and item0_.is_available=true [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_0_, item0_.is_available as is_avail2_2_0_, item0_.description as descript3_2_0_, item0_.name as name4_2_0_, item0_.owner_id as owner_id5_2_0_, requests1_.id as id1_3_1_, requests1_.id as id1_3_2_, requests1_.description as descript2_3_2_, requests1_.requestor_id as requesto3_3_2_ from public.items item0_ left outer join public.requests requests1_ on item0_.id=requests1_.id where item0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into public.users (email, name) values (?, ?) [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select * from bookings where item_id =? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select * from bookings where item_id =? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEMS" not found (this database is empty); SQL statement:
+select item0_.id as id1_2_, item0_.is_available as is_avail2_2_, item0_.description as descript3_2_, item0_.name as name4_2_, item0_.owner_id as owner_id5_2_ from public.items item0_ where item0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select booking0_.id as id1_0_, booking0_.booker_id as booker_i2_0_, booking0_.end_date as end_date3_0_, booking0_.item_id as item_id6_0_, booking0_.start_date as start_da4_0_, booking0_.status as status5_0_ from public.bookings booking0_ where booking0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKINGS" not found (this database is empty); SQL statement:
+select * from bookings where item_id =? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
+2022-08-14 17:47:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.name as name3_4_0_ from public.users user0_ where user0_.id=? [42104-214]
