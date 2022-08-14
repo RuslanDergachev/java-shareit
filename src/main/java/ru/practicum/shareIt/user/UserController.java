@@ -7,7 +7,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.Collection;
 
 @Slf4j
@@ -15,7 +14,6 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     private final UserService userService;
 
     @Autowired
@@ -37,9 +35,9 @@ public class UserController {
     }
 
     @PatchMapping(value = "/{id}")
-    public User update(@PathVariable long id, @RequestBody User user) {
-        log.debug("Обновлён пользователь: {}", user);
-        return userService.updateUser(id, user);
+    public UserDto update(@PathVariable long id, @RequestBody UserDto userDto) {
+        log.debug("Обновлён пользователь: {}", userDto);
+        return userService.updateUser(id, UserMapper.toUser(userDto));
     }
 
     @GetMapping(value = "/{id}")

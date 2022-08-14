@@ -1,4 +1,4 @@
-package ru.practicum.shareIt.booking;
+package ru.practicum.shareIt.comments;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -8,36 +8,34 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bookings", schema = "public")
+@Table(name = "comments", schema = "public")
 @Getter
 @Setter
 @ToString
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
-public class Booking {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "start_date")
-    private LocalDateTime start;
-    @Column(name = "end_date")
-    private LocalDateTime end;
-    @OneToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "item_id")
-    private Item item;
-    private Long bookerId;
-    private BookingStatus status;
+    String text;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "item_id")
+    Item item;
+    Long authorId;
+    LocalDateTime created;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Booking)) return false;
-        return id != null && id.equals(((Booking) o).getId());
+        if (!(o instanceof Comment)) return false;
+        return id != null && id.equals(((Comment) o).getId());
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

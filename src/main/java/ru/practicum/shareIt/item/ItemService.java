@@ -3,7 +3,6 @@ package ru.practicum.shareIt.item;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface ItemService {
@@ -11,7 +10,7 @@ public interface ItemService {
 
     List<ItemDto> getItems(long userId);
 
-    ItemDto updateItem(long userId, long itemId, ItemDto itemDto);
+    Item updateItem(Long userId, Item item);
 
     ItemDto getItemById(long userId, long itemId);
 

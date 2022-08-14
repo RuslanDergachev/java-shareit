@@ -5,11 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.shareIt.comments.Comment;
+import ru.practicum.shareIt.comments.CommentDto;
+import ru.practicum.shareIt.comments.CommentService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
-
 
 @Slf4j
 @Validated
@@ -18,20 +19,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
+    private final CommentService commentService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto add(@RequestHeader("X-Sharer-User-Id") long userId,
-                    @Valid @RequestBody ItemDto itemDto) {
+                       @Valid @RequestBody ItemDto itemDto) {
         log.debug("Добавлена вещь: {}", itemDto);
         return itemService.addNewItem(userId, itemDto);
     }
 
     @PatchMapping("/{itemId}")
     public ItemDto update(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId,
-                       @RequestBody ItemDto itemDto){
+                          @RequestBody ItemDto itemDto) {
         log.debug("Обновлена вещь: {}", itemDto);
-        return itemService.updateItem(userId, itemId, itemDto);
+        itemDto.setId(itemId);
+        return ItemMapper.toItemDto(itemService.updateItem(userId, ItemMapper.toItem(userId, itemDto)));
     }
 
     @GetMapping("/{itemId}")
@@ -57,5 +60,12 @@ public class ItemController {
                            @PathVariable long itemId) {
         log.debug("Получен запрос на удаление вещи");
         itemService.deleteItem(userId, itemId);
+    }
+
+    @PostMapping("/{itemId}/comment")
+    public CommentDto createComment(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId,
+                                    @Valid @RequestBody Comment comment) {
+        log.debug("Добавлен комментарий к вещи: {}", itemId);
+        return commentService.createComment(userId, itemId, comment);
     }
 }
