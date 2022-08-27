@@ -3,11 +3,8 @@ package ru.practicum.shareIt.item.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import ru.practicum.shareIt.request.ItemRequest;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "items", schema = "public")
@@ -15,6 +12,7 @@ import java.util.Set;
 @Setter
 @ToString
 @DynamicUpdate
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
@@ -27,9 +25,7 @@ public class Item {
     private Boolean available;
     private Long ownerId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private Set<ItemRequest> requests = new HashSet<>();
+    private Long requestId;
 
     @Override
     public boolean equals(Object o) {

@@ -27,8 +27,8 @@ import static java.util.Comparator.comparing;
 @Service
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
-    UserService userService;
-    ItemService itemService;
+    private UserService userService;
+    private ItemService itemService;
     private BookingRepository bookingRepository;
     private CommentRepository commentRepository;
 

@@ -16,17 +16,18 @@ public class ItemMapper {
                 .lastBooking(null)
                 .nextBooking(null)
                 .comments(new ArrayList<>())
+                .requestId(item.getRequestId())
                 .build();
     }
 
     public static Item toItem(long ownerId, ItemDto itemDto) {
-        return new Item(
-                itemDto.getId(),
-                itemDto.getName(),
-                itemDto.getDescription(),
-                itemDto.getAvailable(),
-                ownerId,
-                null
-        );
+        return Item.builder()
+                .id(itemDto.getId())
+                .name(itemDto.getName())
+                .description(itemDto.getDescription())
+                .available(itemDto.getAvailable())
+                .ownerId(ownerId)
+                .requestId(itemDto.getRequestId())
+                .build();
     }
 }

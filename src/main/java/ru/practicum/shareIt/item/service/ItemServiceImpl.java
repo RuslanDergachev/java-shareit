@@ -1,6 +1,9 @@
 package ru.practicum.shareIt.item.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareIt.booking.entity.Booking;
@@ -46,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
     public ItemDto addNewItem(long userId, ItemDto itemDto) {
         validationUserId(userId);
         if (userService.getUser(userId) == null) {
-            throw new FalseIdException("Пользователя с ID "+userId+" не существует");
+            throw new FalseIdException("Пользователя с ID " + userId + " не существует");
         }
         if (itemDto.getName() == null || itemDto.getName().isEmpty()) {
             log.info("Нет наименования вещи");
@@ -60,12 +63,13 @@ public class ItemServiceImpl implements ItemService {
             log.info("Нет статуса доступности вещи");
             throw new ValidationException("Отсутствует статус доступности вещи");
         }
-        return ItemMapper.toItemDto(itemRepository.save(ItemMapper.toItem(userId, itemDto)));
+        Item item = ItemMapper.toItem(userId, itemDto);
+        return ItemMapper.toItemDto(itemRepository.save(item));
     }
 
     @Transactional
     public void deleteItem(long userId, long itemId) {
-       validationUserId(userId);
+        validationUserId(userId);
         if (itemId <= 0) {
             log.info("ID вещи меньше или равно 0");
             throw new FalseIdException("ID вещи меньше или равно 0");
@@ -73,21 +77,23 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.deleteById(itemId);
     }
 
-    public List<ItemDto> searchItem(long userId, String search) {
-       validationUserId(userId);
+    public List<ItemDto> searchItem(long userId, String search, int from, int size) {
+        validationUserId(userId);
+        Pageable pageable = PageRequest.of(from, size, Sort.by("id"));
 
         if (search.isEmpty()) {
             log.info("Строка поиска пустая");
             return new ArrayList<>();
         }
-        return itemRepository.search(search).stream()
+        return itemRepository.search(search, pageable).stream()
                 .map(ItemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
 
     public ItemDto getItemById(long userId, long itemId) {
-        if (userId <= 0 & itemId <= 0) {
-            log.info("ID равно 0");
+        validationUserId(userId);
+        if (itemId <= 0) {
+            log.info("ID меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         if (itemRepository.getItemById(itemId) == null) {
@@ -96,7 +102,7 @@ public class ItemServiceImpl implements ItemService {
         }
         List<Booking> booking = getBookingByItemIdByStart(itemId);
         List<Booking> bookings2 = getBookingByItemIdByEnd(booking);
-        ItemDto item = ItemMapper.toItemDto(itemRepository.findById(itemId).get());
+        ItemDto item = ItemMapper.toItemDto(itemRepository.getItemById(itemId));
         if (item.getOwnerId() == userId) {
             if (booking.size() != 0) {
                 item.setLastBooking(BookingMapper.toBookingBefore(booking.get(0)));
@@ -111,7 +117,7 @@ public class ItemServiceImpl implements ItemService {
             commentDtos = commentRepository.getAllByItemId(itemId).stream()
                     .map(CommentMapper::toCommentDto)
                     .peek(c -> c.setAuthorName(userService.getUser(commentRepository.getCommentById(c.getId())
-                    .getAuthorId()).getName()))
+                            .getAuthorId()).getName()))
                     .collect(Collectors.toList());
         }
         item.setComments(commentDtos);
@@ -145,6 +151,17 @@ public class ItemServiceImpl implements ItemService {
         return allItems;
     }
 
+    public List<Item> getItemsByRequestId(long requestId) {
+        if (requestId <= 0) {
+            throw new FalseIdException("ID меньше или равно 0");
+        }
+        List<Item> items = itemRepository.getItemsByRequestId(requestId);
+        if (items.size() == 0) {
+            return new ArrayList<>();
+        }
+        return items;
+    }
+
     @Transactional
     public Item updateItem(Long userId, Item item) {
         Optional<Item> bazeItem = itemRepository.findById(item.getId());
@@ -174,20 +191,20 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.save(newItem);
     }
 
-    private void validationUserId(long userId) {
+    public static void validationUserId(long userId) {
         if (userId <= 0) {
             log.info("ID пользователя равен 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
     }
 
-    private List<Booking> getBookingByItemIdByStart(long itemId){
-        return  bookingRepository.getBookingsByItemById(itemId)
+    public List<Booking> getBookingByItemIdByStart(long itemId) {
+        return bookingRepository.getBookingsByItemById(itemId)
                 .stream().sorted(comparing(Booking::getStart)).collect(Collectors.toList());
     }
 
-    private List<Booking> getBookingByItemIdByEnd(List<Booking> booking){
-        return  booking.stream().sorted(comparing(Booking::getEnd).reversed())
+    public List<Booking> getBookingByItemIdByEnd(List<Booking> booking) {
+        return booking.stream().sorted(comparing(Booking::getEnd).reversed())
                 .collect(Collectors.toList());
     }
 }

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @DynamicUpdate
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {

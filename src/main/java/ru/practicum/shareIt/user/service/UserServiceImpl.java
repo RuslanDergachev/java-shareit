@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
             saveUser.setEmail(user.getEmail());
         }
         userRepository.saveAndFlush(saveUser);
-
         return UserMapper.toUserDto(saveUser);
     }
 

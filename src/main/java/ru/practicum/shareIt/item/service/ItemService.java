@@ -1,8 +1,10 @@
 package ru.practicum.shareIt.item.service;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareIt.item.entity.Item;
 import ru.practicum.shareIt.item.entity.ItemDto;
+import ru.practicum.shareIt.request.model.dto.ItemRequestDto;
 
 import java.util.List;
 
@@ -16,7 +18,9 @@ public interface ItemService {
 
     ItemDto getItemById(long userId, long itemId);
 
-    List<ItemDto> searchItem(long userId, String searchItem);
+    List<ItemDto> searchItem(long userId, String searchItem, int from, int size);
 
     void deleteItem(long userId, long itemId);
+
+    List<Item> getItemsByRequestId(long requestId);
 }

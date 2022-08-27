@@ -1,6 +1,10 @@
 package ru.practicum.shareIt.booking.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareIt.booking.entity.*;
@@ -11,6 +15,7 @@ import ru.practicum.shareIt.exception.ValidationException;
 import ru.practicum.shareIt.item.entity.ItemDto;
 import ru.practicum.shareIt.item.entity.ItemMapper;
 import ru.practicum.shareIt.item.service.ItemService;
+import ru.practicum.shareIt.request.service.ItemRequestServiceImpl;
 import ru.practicum.shareIt.user.service.UserService;
 
 import java.time.LocalDate;
@@ -73,7 +78,7 @@ public class BookingServiceImpl implements BookingService {
         validationUserIdAndBookingId(userId, bookingId);
         Booking booking = bookingRepository.getBookingById(bookingId);
         if (approved == null || approved.isEmpty()) {
-            throw new NotFoundException("статус бронирования отсутствует");
+            throw new NotFoundException("Статус бронирования отсутствует");
         }
         if (userId != booking.getItem().getOwnerId()) {
             throw new NotFoundException("Пользователь не является собственником вещи");
@@ -110,13 +115,19 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingUpdateDto> getBookings(long userId, String state) {
+    public List<BookingUpdateDto> getBookings(long userId, String state, int from, int size) {
         validationUserId(userId);
+        validationPage(from, size);
         if (state == null) {
             state = "ALL";
         }
+        if (from > 0) {
+            --from;
+        }
+        Pageable pageable = PageRequest.of(from, size, Sort.by("id").descending());
+        Page<Booking> bookingsPageable = bookingRepository.getAllByBookerId(userId, pageable);
         if (state.equals("CURRENT")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
                     .filter(b -> b.getStart().isBefore(LocalDateTime.now()))
@@ -125,21 +136,21 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("WAITING")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.WAITING))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
         if (state.equals("REJECTED")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
         if (state.equals("PAST")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.APPROVED))
                     .filter(b -> b.getEnd().isBefore(LocalDateTime.now()))
@@ -147,7 +158,7 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("FUTURE")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.WAITING) ||
                             b.getStatus().equals(BookingStatus.APPROVED))
@@ -155,23 +166,27 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("ALL")) {
-            return bookingRepository.getAllByBookerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
-                    .filter(b -> !b.getStatus().equals(BookingStatus.REJECTED))
-                    .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
         throw new ValidationException("Unknown state: UNSUPPORTED_STATUS");
     }
 
     @Override
-    public List<BookingUpdateDto> getBookingByIdByOwner(long userId, String state) {
+    public List<BookingUpdateDto> getBookingByIdByOwner(long userId, String state, int from, int size) {
         validationUserId(userId);
+        validationPage(from, size);
         if (state == null) {
             state = "ALL";
         }
+        if (from > 0) {
+            --from;
+        }
+        Pageable pageable = PageRequest.of(from, size, Sort.by("id"));
+        Page<Booking> bookingsPageable = bookingRepository.getBookingsByOwnerId(userId, pageable);
         if (state.equals("CURRENT")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
                     .filter(b -> b.getStart().isBefore(LocalDateTime.now()))
@@ -180,21 +195,21 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("WAITING")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.WAITING))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
         if (state.equals("REJECTED")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
         if (state.equals("PAST")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.APPROVED))
                     .filter(b -> b.getEnd().isBefore(LocalDateTime.now()))
@@ -202,7 +217,7 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("FUTURE")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> !b.getStatus().equals(BookingStatus.REJECTED) ||
                             b.getStatus().equals(BookingStatus.APPROVED))
@@ -210,9 +225,8 @@ public class BookingServiceImpl implements BookingService {
                     .collect(Collectors.toList());
         }
         if (state.equals("ALL")) {
-            return bookingRepository.getBookingsByOwnerId(userId).stream()
+            return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
-                    .filter(b -> !b.getStatus().equals(BookingStatus.REJECTED))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
@@ -224,7 +238,7 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.deleteBookingById(bookingId);
     }
 
-    private void validationUserIdAndBookingId(long userId, long bookingId) {
+    public void validationUserIdAndBookingId(long userId, long bookingId) {
         if (userId <= 0) {
             log.debug("ID пользователя меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
@@ -244,13 +258,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private void validationUserId(long userId) {
-        if (userService.getUser(userId) == null) {
-            log.info("Пользователя {} не существует", userId);
-            throw new NotFoundException("Пользователя ID " + userId + " не существует");
+        ItemRequestServiceImpl.validationByUserId(userId, userService, log);
+    }
+
+    public void validationPage(int from, int size) {
+        if (from < 0) {
+            log.info("Параметр from не может быть меньше 0 и равен {}", from);
+            throw new ValidationException("Параметр from не может быть меньше 0");
         }
-        if (userId <= 0) {
-            log.debug("ID пользователя меньше или равно 0");
-            throw new FalseIdException("ID меньше или равно 0");
+        if (size <= 0) {
+            log.info("Параметр size не может быть меньше или равен 0 и равен {}", size);
+            throw new ValidationException("Параметр size не может быть меньше или равен 0");
         }
     }
 }

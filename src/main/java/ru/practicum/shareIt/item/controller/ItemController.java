@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareIt.comments.entity.Comment;
 import ru.practicum.shareIt.comments.entity.CommentDto;
 import ru.practicum.shareIt.comments.service.CommentService;
-import ru.practicum.shareIt.item.service.ItemService;
 import ru.practicum.shareIt.item.entity.ItemDto;
 import ru.practicum.shareIt.item.entity.ItemMapper;
+import ru.practicum.shareIt.item.service.ItemService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,9 +53,11 @@ public class ItemController {
     }
 
     @GetMapping("/search")
-    public List<ItemDto> searchItem(@RequestHeader("X-Sharer-User-Id") long userId, @RequestParam String text) {
+    public List<ItemDto> searchItem(@RequestHeader("X-Sharer-User-Id") long userId, @RequestParam String text,
+                                    @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
+                                    @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
         log.debug("Получен запрос вещей по наименованию");
-        return itemService.searchItem(userId, text);
+        return itemService.searchItem(userId, text, from, size);
     }
 
     @DeleteMapping("/{itemId}")

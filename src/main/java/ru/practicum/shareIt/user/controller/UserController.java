@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareIt.user.service.UserService;
 import ru.practicum.shareIt.user.entity.User;
 import ru.practicum.shareIt.user.entity.UserDto;
 import ru.practicum.shareIt.user.entity.UserMapper;
+import ru.practicum.shareIt.user.service.UserService;
 
 import javax.validation.Valid;
 import java.util.Collection;

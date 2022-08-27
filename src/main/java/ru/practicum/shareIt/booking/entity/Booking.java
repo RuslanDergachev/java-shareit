@@ -24,8 +24,8 @@ public class Booking {
     private LocalDateTime start;
     @Column(name = "end_date")
     private LocalDateTime end;
-    @OneToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "item_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "item_id")
     private Item item;
     private Long bookerId;
     private BookingStatus status;

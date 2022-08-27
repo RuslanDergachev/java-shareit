@@ -1,10 +1,9 @@
-package ru.practicum.shareIt.request;
+package ru.practicum.shareIt.request.model.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "requests", schema = "public")
@@ -12,11 +11,14 @@ import java.util.Date;
 @Setter
 @ToString
 @DynamicUpdate
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
     String description;
     @Column(name = "requestor_id")
-    long requestor;
+    Long requestorId;
 }

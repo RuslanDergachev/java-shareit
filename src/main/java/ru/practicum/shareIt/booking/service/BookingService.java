@@ -15,9 +15,9 @@ public interface BookingService {
 
     BookingUpdateDto getBookingByIdAndBookerId(long userId, long bookingId);
 
-    List<BookingUpdateDto> getBookings(long userId, String state);
+    List<BookingUpdateDto> getBookings(long userId, String state, int from, int size);
 
-    List<BookingUpdateDto> getBookingByIdByOwner(long userId, String state);
+    List<BookingUpdateDto> getBookingByIdByOwner(long userId, String state, int from, int size);
 
     void deleteBooking(long userId, long bookingId);
 
