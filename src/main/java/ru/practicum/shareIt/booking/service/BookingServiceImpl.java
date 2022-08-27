@@ -130,8 +130,8 @@ public class BookingServiceImpl implements BookingService {
             return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
-                    .filter(b -> b.getStart().isBefore(LocalDateTime.now()))
-                    .filter(b -> b.getEnd().isAfter(LocalDateTime.now()))
+                    .filter(b -> b.getStart().isBefore(LocalDateTime.now().withNano(0)))
+                    .filter(b -> b.getEnd().isAfter(LocalDateTime.now().withNano(0)))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
@@ -153,7 +153,7 @@ public class BookingServiceImpl implements BookingService {
             return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.APPROVED))
-                    .filter(b -> b.getEnd().isBefore(LocalDateTime.now()))
+                    .filter(b -> b.getEnd().isBefore(LocalDateTime.now().withNano(0)))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
@@ -189,8 +189,8 @@ public class BookingServiceImpl implements BookingService {
             return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.REJECTED))
-                    .filter(b -> b.getStart().isBefore(LocalDateTime.now()))
-                    .filter(b -> b.getEnd().isAfter(LocalDateTime.now()))
+                    .filter(b -> b.getStart().isBefore(LocalDateTime.now().withNano(0)))
+                    .filter(b -> b.getEnd().isAfter(LocalDateTime.now().withNano(0)))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }
@@ -212,7 +212,7 @@ public class BookingServiceImpl implements BookingService {
             return bookingsPageable.stream()
                     .map(BookingMapper::bookingDtoForUpdate)
                     .filter(b -> b.getStatus().equals(BookingStatus.APPROVED))
-                    .filter(b -> b.getEnd().isBefore(LocalDateTime.now()))
+                    .filter(b -> b.getEnd().isBefore(LocalDateTime.now().withNano(0)))
                     .sorted(comparing(BookingUpdateDto::getId).reversed())
                     .collect(Collectors.toList());
         }

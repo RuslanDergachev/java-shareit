@@ -12,7 +12,7 @@ public class ItemRequestMapper {
                 .id(itemRequest.getId())
                 .description(itemRequest.getDescription())
                 .requestor(itemRequest.getRequestorId())
-                .created(LocalDateTime.now())
+                .created(LocalDateTime.now().withNano(0))
                 .items(new ArrayList<>())
                 .build();
     }

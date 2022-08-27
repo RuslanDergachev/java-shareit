@@ -45,7 +45,7 @@ public class CommentServiceImpl implements CommentService {
             throw new NotFoundException("Пользователь не бронировал вещь");
         }
         for (Booking booking : bookingUser) {
-            if (booking.getStart().isAfter(LocalDateTime.now())) {
+            if (booking.getStart().isAfter(LocalDateTime.now().withNano(0))) {
                 throw new ValidationException("Отзыв нельзя оставить до начала пользования вещью");
             } else {
                 break;
@@ -54,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
         ItemDto itemDto = itemService.getItemById(userId, itemId);
         comment.setAuthorId(userId);
         comment.setItem(ItemMapper.toItem(itemDto.getOwnerId(), itemDto));
-        comment.setCreated(LocalDateTime.now());
+        comment.setCreated(LocalDateTime.now().withNano(0));
         CommentDto commentDto = CommentMapper.toCommentDto(commentRepository.save(comment));
         commentDto.setAuthorName(userService.getUser(userId).getName());
         return commentDto;

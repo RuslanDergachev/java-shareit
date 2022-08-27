@@ -92,7 +92,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         ItemRequestDto itemRequestDto = ItemRequestMapper
                 .toItemRequestDto(itemRequestRepository.findItemRequestsById(requestId));
         itemRequestDto.setItems(itemRepository.getItemsByRequestId(itemRequestDto.getId()));
-        itemRequestDto.setCreated(LocalDateTime.now());
+        itemRequestDto.setCreated(LocalDateTime.now().withNano(0));
         return itemRequestDto;
     }
 
