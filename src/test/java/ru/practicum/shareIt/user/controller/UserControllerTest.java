@@ -26,17 +26,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = UserController.class)
 class UserControllerTest {
     @MockBean
-    UserService userService;
+    private UserService userService;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
     @Autowired
     private MockMvc mvc;
-    private User user = new User(1L, "Vasya", "vasya@mail.ru");
-    private UserDto userDto = UserMapper.toUserDto(user);
-    private List<User> allUsers = List.of(user);
+    private final User user = new User(1L, "Vasya", "vasya@mail.ru");
+    private final UserDto userDto = UserMapper.toUserDto(user);
+    private final List<User> allUsers = List.of(user);
 
     @Test
-    void getAllUsersTest() throws Exception {
+    void shouldReturnAllUsersTest() throws Exception {
         when(userService.getUsers())
                 .thenReturn(allUsers);
         mvc.perform(get("/users"))
@@ -46,7 +46,7 @@ class UserControllerTest {
     }
 
     @Test
-    void createNewUserTest() throws Exception {
+    void shouldReturnNewUserTest() throws Exception {
         when(userService.createUser(any()))
                 .thenReturn(user);
         mvc.perform(post("/users")
@@ -61,7 +61,7 @@ class UserControllerTest {
     }
 
     @Test
-    void updateUserTest() throws Exception {
+    void shouldReturnUpdateUserTest() throws Exception {
         when(userService.updateUser(anyLong(), any()))
                 .thenReturn(userDto);
         mvc.perform(patch("/users/1")
@@ -76,7 +76,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getUser() throws Exception {
+    void shouldReturnUser() throws Exception {
         when(userService.getUser(anyLong()))
                 .thenReturn(user);
         mvc.perform(get("/users/1")
@@ -87,7 +87,7 @@ class UserControllerTest {
     }
 
     @Test
-    void removeUser() throws Exception {
+    void shouldRemoveUser() throws Exception {
         mvc.perform(delete("/users/1")
                         .param("id", "1"))
                 .andExpect(status().isOk());

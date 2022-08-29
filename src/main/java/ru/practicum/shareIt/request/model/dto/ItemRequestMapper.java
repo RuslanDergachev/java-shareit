@@ -17,11 +17,11 @@ public class ItemRequestMapper {
                 .build();
     }
 
-    public static ItemRequest toItemRequest(ItemRequestDto itemRequestDto) {
+    public static ItemRequest toItemRequest(long userId, ItemRequestDto itemRequestDto) {
         return ItemRequest.builder()
                 .id(itemRequestDto.getId())
                 .description(itemRequestDto.getDescription())
-                .requestorId(itemRequestDto.getRequestor())
+                .requestorId(userId)
                 .build();
     }
 }

@@ -22,12 +22,12 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
     @Mock
-    UserRepository mockUserRepository;
+    private UserRepository mockUserRepository;
     @InjectMocks
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @Test
-    void getUserByIdTest() {
+    void shouldReturnUserByIdTest() {
         when(mockUserRepository.findById(Mockito.eq(1L)))
                 .thenReturn(Optional.of(new User(1L, "Ivan", "user@email.ru")));
         User newUser = new User(1L, "Ivan", "user@mail.ru");
@@ -46,7 +46,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void createUserTest() {
+    void shouldReturnNewUserTest() {
         when(mockUserRepository.save(Mockito.any()))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
         User newUser = new User(1L, "Ivan", "user@mail.ru");
@@ -76,7 +76,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void updateUserTest() {
+    void shouldReturnUpdateUserTest() {
         User user = new User(1L, "Petya", "user@email.ru");
         when(mockUserRepository.findById(1L))
                 .thenReturn(Optional.of(user));
@@ -90,7 +90,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getUsersTest() {
+    void shouldReturnUsersTest() {
         List<User> userList = List.of(new User(1L, "Ivan", "user@email.ru"),
                 new User(2L, "Petr", "petr@email.ru"));
         when(mockUserRepository.findAll())
@@ -101,7 +101,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void removeUserTest() {
+    void shouldRemoveUserTest() {
         userService.removeUser(1L);
         Mockito.verify(mockUserRepository, Mockito.times(1))
                 .deleteById(1L);

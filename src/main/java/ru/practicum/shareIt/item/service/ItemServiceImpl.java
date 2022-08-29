@@ -21,9 +21,7 @@ import ru.practicum.shareIt.item.entity.ItemMapper;
 import ru.practicum.shareIt.item.repository.ItemRepository;
 import ru.practicum.shareIt.user.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -83,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
 
         if (search.isEmpty()) {
             log.info("Строка поиска пустая");
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
         return itemRepository.search(search, pageable).stream()
                 .map(ItemMapper::toItemDto)
@@ -157,7 +155,7 @@ public class ItemServiceImpl implements ItemService {
         }
         List<Item> items = itemRepository.getItemsByRequestId(requestId);
         if (items.size() == 0) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
         return items;
     }

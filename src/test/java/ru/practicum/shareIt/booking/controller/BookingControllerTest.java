@@ -29,11 +29,11 @@ class BookingControllerTest {
     @MockBean
     private BookingService mockBookingService;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
     @Autowired
     private MockMvc mvc;
 
-    private BookingDto bookingDto = BookingDto.builder()
+    private final BookingDto bookingDto = BookingDto.builder()
             .id(1L)
             .status(BookingStatus.WAITING)
             .bookerId(1L)
@@ -43,16 +43,16 @@ class BookingControllerTest {
             .end(LocalDateTime.of(2022, 8, 2, 12, 30, 30))
             .build();
 
-    private BookingDto bookingDto1 = BookingDto.builder()
+    private final BookingDto bookingDto1 = BookingDto.builder()
             .bookerId(1L)
             .itemId(1L)
             .start(LocalDateTime.of(2022, 8, 1, 12, 30, 30))
             .end(LocalDateTime.of(2022, 8, 2, 12, 30, 30))
             .build();
 
-    private Item item = new Item(1L, "перфоратор", "перфоратор электрический"
+    private final Item item = new Item(1L, "перфоратор", "перфоратор электрический"
             , true, 1L, 1L);
-    private BookingUpdateDto bookingUpdateDto = BookingUpdateDto.builder()
+    private final BookingUpdateDto bookingUpdateDto = BookingUpdateDto.builder()
             .id(1L)
             .status(BookingStatus.APPROVED)
             .start(LocalDateTime.of(2022, 8, 1, 12, 30, 30))
@@ -62,7 +62,7 @@ class BookingControllerTest {
             .build();
 
     @Test
-    void addBookingTest() throws Exception {
+    void shouldReturnNewBookingTest() throws Exception {
         when(mockBookingService.addNewBooking(1L, bookingDto1))
                 .thenReturn(bookingDto);
         mvc.perform(post("/bookings")
@@ -82,7 +82,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void updateBookingTest() throws Exception {
+    void shouldReturnUpdateBookingTest() throws Exception {
         String approved = "true";
         when(mockBookingService.updateBooking(1L, 1L, approved))
                 .thenReturn(bookingUpdateDto);
@@ -100,7 +100,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void getBookingByIdTest() throws Exception {
+    void shouldReturnBookingByIdTest() throws Exception {
         when(mockBookingService.getBookingByIdAndBookerId(1L, 1L))
                 .thenReturn(bookingUpdateDto);
         mvc.perform(get("/bookings/1")
@@ -116,7 +116,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void getBookingsTest() throws Exception {
+    void shouldReturnBookingsListTest() throws Exception {
         String state = "ALL";
         when(mockBookingService.getBookings(1L, state, 0, 1))
                 .thenReturn(List.of(bookingUpdateDto));
@@ -131,7 +131,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void getBookingByIdByOwnerTest() throws Exception {
+    void shouldReturnBookingByIdByOwnerTest() throws Exception {
         String state = "ALL";
         when(mockBookingService.getBookingByIdByOwner(1L, state, 0, 1))
                 .thenReturn(List.of(bookingUpdateDto));
@@ -146,7 +146,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void deleteBookingTest() throws Exception {
+    void shouldDeleteBookingTest() throws Exception {
         mvc.perform(delete("/bookings/1")
                         .header("X-Sharer-User-Id", 1)
                         .param("bookingId", "1"))

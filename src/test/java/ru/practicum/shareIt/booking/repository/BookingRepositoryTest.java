@@ -39,7 +39,7 @@ class BookingRepositoryTest {
     @Autowired
     private BookingRepository bookingRepository;
 
-    private Item item = Item.builder()
+    private final Item item = Item.builder()
             .name("Дрель электрическая")
             .description("Mocito")
             .available(true)
@@ -47,7 +47,7 @@ class BookingRepositoryTest {
             .requestId(1L)
             .build();
 
-    private Booking booking = Booking.builder()
+    private final Booking booking = Booking.builder()
             .start(LocalDateTime.of(2022, 8, 25, 12, 10, 10))
             .end(LocalDateTime.of(2022, 8, 25, 13, 10, 10))
             .bookerId(1L)
@@ -57,7 +57,7 @@ class BookingRepositoryTest {
 
     @Test
     @Rollback
-    void getBookingsByItemByIdTest() {
+    void shouldReturnBookingsByItemByIdTest() {
         itemRepository.save(item);
         bookingRepository.save(booking);
         List<Booking> bookingList = bookingRepository.getBookingsByItemById(item.getId());
@@ -68,7 +68,7 @@ class BookingRepositoryTest {
 
     @Test
     @Rollback
-    void getBookingsByOwnerIdTest() {
+    void shouldReturnBookingsByOwnerIdTest() {
         itemRepository.save(item);
         bookingRepository.save(booking);
         int from = 0;

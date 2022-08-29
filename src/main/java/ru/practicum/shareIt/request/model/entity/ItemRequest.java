@@ -17,8 +17,8 @@ import javax.persistence.*;
 public class ItemRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String description;
+    private Long id;
+    private String description;
     @Column(name = "requestor_id")
-    Long requestorId;
+    private Long requestorId;
 }

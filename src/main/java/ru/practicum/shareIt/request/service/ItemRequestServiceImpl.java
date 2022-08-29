@@ -29,10 +29,10 @@ import static java.util.Comparator.comparing;
 @Service
 @AllArgsConstructor
 public class ItemRequestServiceImpl implements ItemRequestService {
-    UserService userService;
-    ItemRequestRepository itemRequestRepository;
-    ItemService itemService;
-    ItemRepository itemRepository;
+    private UserService userService;
+    private ItemRequestRepository itemRequestRepository;
+    private ItemService itemService;
+    private ItemRepository itemRepository;
 
     @Override
     public ItemRequestDto addNewItemRequest(long userId, ItemRequestDto itemRequestDto) {
@@ -41,8 +41,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
             log.info("Запрос пользователя {} пустой", userId);
             throw new ValidationException("Запрос пользователя ID " + userId + " пустой");
         }
-        ItemRequest itemRequest = ItemRequestMapper.toItemRequest(itemRequestDto);
-        itemRequest.setRequestorId(userId);
+        ItemRequest itemRequest = ItemRequestMapper.toItemRequest(userId, itemRequestDto);
         return ItemRequestMapper.toItemRequestDto(itemRequestRepository.save(itemRequest));
     }
 

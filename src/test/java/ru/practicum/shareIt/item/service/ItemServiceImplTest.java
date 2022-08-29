@@ -40,7 +40,7 @@ class ItemServiceImplTest {
     @Mock
     private CommentRepository mockCommentRepository;
     @InjectMocks
-    ItemServiceImpl itemService;
+    private ItemServiceImpl itemService;
     private ItemDto itemDto = ItemDto.builder()
             .id(1L)
             .name("Перфоратор электрический")
@@ -57,7 +57,7 @@ class ItemServiceImplTest {
             .build();
 
     @Test
-    void addNewItem() {
+    void shouldReturnNewItem() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -141,7 +141,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void deleteItem() {
+    void shouldDeleteItem() {
         itemService.deleteItem(1L, 1L);
         Mockito.verify(mockItemRepository, Mockito.times(1))
                 .deleteById(1L);
@@ -157,7 +157,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void searchItemByText() {
+    void shouldReturnItemByText() {
         int from = 0;
         int size = 1;
         String text = "ПЕРфоратор";
@@ -188,7 +188,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void getItemById() {
+    void shouldReturnItemById() {
         Booking booking = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 1, 12, 10, 10))
@@ -228,7 +228,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void getItemByIdNotBookingTest() {
+    void shouldReturnItemByIdNotBookingTest() {
         List<Comment> comments = new ArrayList<>();
         Mockito
                 .when(mockItemRepository.getItemById(Mockito.anyLong()))
@@ -265,7 +265,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void getItems() {
+    void shouldReturnItemsList() {
         Booking booking = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 1, 12, 10, 10))
@@ -296,7 +296,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void getItemsByIdNotBookingTest() {
+    void shouldReturnItemsByIdNotBookingTest() {
         Mockito
                 .when(mockItemRepository.findAll())
                 .thenReturn(List.of(item));
@@ -310,7 +310,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void getItemsByRequestId() {
+    void shouldReturnItemsByRequestId() {
         Mockito
                 .when(mockItemRepository.getItemsByRequestId(1L))
                 .thenReturn(List.of(item));
@@ -329,7 +329,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void updateItem() {
+    void shouldReturnUpdateItem() {
         Item item1 = Item.builder()
                 .id(1L)
                 .name("Дрель электрическая")
@@ -378,7 +378,7 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void validationByUserIdLessThenZero() {
+    void whenUserIdLessThenZero_thenReturnException() {
         final FalseIdException exception1 = Assertions.assertThrows(
                 FalseIdException.class,
                 () -> ItemServiceImpl.validationUserId(-1L));

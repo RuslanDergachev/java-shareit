@@ -11,6 +11,8 @@ import ru.practicum.shareIt.request.service.ItemRequestService;
 import javax.validation.Valid;
 import java.util.List;
 
+import static ru.practicum.shareIt.util.Util.USER_HEADER;
+
 @Slf4j
 @Validated
 @RestController
@@ -21,20 +23,20 @@ public class RequestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public ItemRequestDto add(@RequestHeader("X-Sharer-User-Id") long userId,
+    public ItemRequestDto add(@RequestHeader(USER_HEADER) long userId,
                               @Valid @RequestBody ItemRequestDto itemRequestDto) {
         log.debug("Добавлен запрос вещи: {}", itemRequestDto);
         return itemRequestService.addNewItemRequest(userId, itemRequestDto);
     }
 
     @GetMapping()
-    public List<ItemRequestDto> get(@RequestHeader("X-Sharer-User-Id") long userId) {
+    public List<ItemRequestDto> get(@RequestHeader(USER_HEADER) long userId) {
         log.debug("Получен список запросов пользователя {} на поиск вещей для бронирования", userId);
         return itemRequestService.getItemRequests(userId);
     }
 
     @GetMapping("/all")
-    public List<ItemRequestDto> getAll(@RequestHeader("X-Sharer-User-Id") long userId,
+    public List<ItemRequestDto> getAll(@RequestHeader(USER_HEADER) long userId,
                                        @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
                                        @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
         log.debug("Получен список всех запросов");
@@ -42,7 +44,7 @@ public class RequestController {
     }
 
     @GetMapping("/{requestId}")
-    public ItemRequestDto getRequestById(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long requestId) {
+    public ItemRequestDto getRequestById(@RequestHeader(USER_HEADER) long userId, @PathVariable long requestId) {
         log.debug("Получен список всех запросов");
         return itemRequestService.getRequestById(userId, requestId);
     }

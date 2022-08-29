@@ -39,13 +39,13 @@ class CommentServiceImplTest {
     @InjectMocks
     private CommentServiceImpl commentService;
 
+    private static final Comment COMMENT = Comment.builder()
+            .id(1L)
+            .text("Какой-то текст")
+            .authorId(1L)
+            .build();
     @Test
-    void createCommentTest() {
-        Comment comment = Comment.builder()
-                .id(1L)
-                .text("Какой-то текст")
-                .authorId(1L)
-                .build();
+    void shouldReturnNewCommentTest() {
         Booking booking = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 1, 12, 10, 10))
@@ -67,12 +67,12 @@ class CommentServiceImplTest {
                 .when(itemService.getItemById(1L, 1L))
                 .thenReturn(ItemMapper.toItemDto(item));
         Mockito
-                .when(commentRepository.save(comment))
-                .thenReturn(comment);
+                .when(commentRepository.save(COMMENT))
+                .thenReturn(COMMENT);
         Mockito
                 .when(userService.getUser(1L))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
-        CommentDto commentDto = commentService.createComment(1L, 1L, comment);
+        CommentDto commentDto = commentService.createComment(1L, 1L, COMMENT);
 
         assertEquals(1, commentDto.getId());
         assertEquals("Ivan", commentDto.getAuthorName());
@@ -95,28 +95,18 @@ class CommentServiceImplTest {
 
     @Test
     void whenBookingIsEmpty_thenReturnException() {
-        Comment comment = Comment.builder()
-                .id(1L)
-                .text("Какой-то текст")
-                .authorId(1L)
-                .build();
         Mockito
                 .when(bookingRepository.getBookingsByItemById(1L))
                 .thenReturn(new ArrayList<>());
         final NotFoundException exception = Assertions.assertThrows(
                 NotFoundException.class,
-                () -> commentService.createComment(1L, 1L, comment));
+                () -> commentService.createComment(1L, 1L, COMMENT));
 
         assertEquals("Пользователь не бронировал вещь", exception.getMessage());
     }
 
     @Test
     void whenBookingDateStartAfterNow_thenReturnException() {
-        Comment comment = Comment.builder()
-                .id(1L)
-                .text("Какой-то текст")
-                .authorId(1L)
-                .build();
         Booking booking = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 9, 1, 12, 10, 10))
@@ -129,7 +119,7 @@ class CommentServiceImplTest {
                 .thenReturn(List.of(booking));
         final ValidationException exception = Assertions.assertThrows(
                 ValidationException.class,
-                () -> commentService.createComment(1L, 1L, comment));
+                () -> commentService.createComment(1L, 1L, COMMENT));
 
         assertEquals("Отзыв нельзя оставить до начала пользования вещью", exception.getMessage());
     }

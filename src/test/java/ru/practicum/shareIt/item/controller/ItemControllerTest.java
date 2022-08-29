@@ -34,41 +34,40 @@ class ItemControllerTest {
     @MockBean
     private CommentService commentService;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
     @Autowired
     private MockMvc mvc;
 
-    private ItemDto itemDto = new ItemDto(
-            1L,
-            "Дрель электрическая",
-            "Mocito",
-            false,
-            1L,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-    );
-    private ItemDto itemDto1 = new ItemDto(
-            1L,
-            "Отвертка электрическая",
-            "Mocito",
-            false,
-            1L,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-    );
+    private final ItemDto itemDto = ItemDto.builder()
+            .id(1L)
+            .name("Дрель электрическая")
+            .description("Mocito")
+            .available(false)
+            .ownerId(1L)
+            .start(null)
+            .end(null)
+            .lastBooking(null)
+            .nextBooking(null)
+            .comments(null)
+            .requestId(null)
+            .build();
 
-    private Item item = new Item(1L, "Отвертка электрическая", "Mocito",
-            true, 1L, 1L);
-    private List<ItemDto> itemDtoList = List.of(itemDto);
-    private CommentDto commentDto = new CommentDto(
+    private final ItemDto itemDto1 = ItemDto.builder()
+            .id(1L)
+            .name("Отвертка электрическая")
+            .description("Mocito")
+            .available(false)
+            .ownerId(1L)
+            .start(null)
+            .end(null)
+            .lastBooking(null)
+            .nextBooking(null)
+            .comments(null)
+            .requestId(null)
+            .build();
+
+    private final List<ItemDto> itemDtoList = List.of(itemDto);
+    private final CommentDto commentDto = new CommentDto(
             1L,
             "Какой-то комментарий",
             "Vasya",
@@ -76,7 +75,7 @@ class ItemControllerTest {
     );
 
     @Test
-    void addItemAndReturnItemDtoTest() throws Exception {
+    void shouldReturnNewItemDtoTest() throws Exception {
         when(itemService.addNewItem(anyLong(), any()))
                 .thenReturn(itemDto);
         mvc.perform(post("/items")
@@ -97,7 +96,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void update() throws Exception {
+    void shouldReturnUpdateItemDto() throws Exception {
         when(itemService.updateItem(1L, ItemMapper.toItem(1L, itemDto)))
                 .thenReturn(ItemMapper.toItem(1L, itemDto1));
         mvc.perform(patch("/items/1")
@@ -114,7 +113,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void getItemByIdTest() throws Exception {
+    void shouldReturnItemDtoByIdTest() throws Exception {
         when(itemService.getItemById(1L, 1L))
                 .thenReturn(itemDto);
         mvc.perform(get("/items/1")
@@ -128,7 +127,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void getItemsDtoListTest() throws Exception {
+    void shouldReturnItemsDtoListTest() throws Exception {
         when(itemService.getItems(1L))
                 .thenReturn(itemDtoList);
         mvc.perform(get("/items")
@@ -139,7 +138,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void searchItemByTextTest() throws Exception {
+    void shouldReturnItemByTextTest() throws Exception {
         when(itemService.searchItem(1L, "Дрель", 0, 1))
                 .thenReturn(itemDtoList);
         mvc.perform(get("/items/search")
@@ -153,7 +152,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void deleteItemTest() throws Exception {
+    void shouldDeleteItemTest() throws Exception {
         mvc.perform(delete("/items/1")
                         .header("X-Sharer-User-Id", 1)
                         .param("id", "1"))
@@ -161,7 +160,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void createCommentTest() throws Exception {
+    void shouldReturnNewCommentTest() throws Exception {
         when(commentService.createComment(anyLong(), anyLong(), any()))
                 .thenReturn(commentDto);
         mvc.perform(post("/items/1/comment")

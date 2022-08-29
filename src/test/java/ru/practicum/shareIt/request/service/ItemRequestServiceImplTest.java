@@ -29,20 +29,20 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 class ItemRequestServiceImplTest {
     @InjectMocks
-    ItemRequestServiceImpl itemRequestServiceImpl;
+    private ItemRequestServiceImpl itemRequestServiceImpl;
     @Mock
-    ItemRequestRepository mockItemRequestRepository;
+    private ItemRequestRepository mockItemRequestRepository;
     @Mock
-    UserService mockUserService;
+    private UserService mockUserService;
     @Mock
-    ItemService mockItemService;
+    private ItemService mockItemService;
     @Mock
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
     @Mock
-    Logger log;
+    private Logger log;
 
     @Test
-    void addNewItemRequest() {
+    void shouldReturnNewItemRequest() {
 
         ItemRequestDto itemRequestDto = ItemRequestMapper
                 .toItemRequestDto(new ItemRequest(1L, "перфоратор", 1L));
@@ -51,7 +51,7 @@ class ItemRequestServiceImplTest {
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
         Mockito
                 .when(mockItemRequestRepository.save(Mockito.any()))
-                .thenReturn(ItemRequestMapper.toItemRequest(itemRequestDto));
+                .thenReturn(ItemRequestMapper.toItemRequest(1L, itemRequestDto));
         ItemRequestDto itemRequestDto1 = itemRequestServiceImpl.addNewItemRequest(1L, itemRequestDto);
         Mockito.verify(mockUserService, Mockito.times(1))
                 .getUser(1L);
@@ -77,7 +77,7 @@ class ItemRequestServiceImplTest {
     }
 
     @Test
-    void getItemRequests() {
+    void shouldReturnItemRequestsList() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -105,7 +105,7 @@ class ItemRequestServiceImplTest {
     }
 
     @Test
-    void getAllItemRequests() {
+    void shouldReturnAllItemRequests() {
         int from = 0;
         int size = 20;
         Mockito
@@ -154,7 +154,7 @@ class ItemRequestServiceImplTest {
     }
 
     @Test
-    void getRequestById() {
+    void shouldReturnRequestById() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -217,7 +217,7 @@ class ItemRequestServiceImplTest {
     }
 
     @Test
-    void validationByUserId() {
+    void whenUserDoesNotExist_thenReturnException() {
         final NotFoundException exception = Assertions.assertThrows(
                 NotFoundException.class,
                 () -> ItemRequestServiceImpl.validationByUserId(2L, mockUserService, log));
@@ -226,7 +226,7 @@ class ItemRequestServiceImplTest {
     }
 
     @Test
-    void validationByUserIdLessThenZero() {
+    void whenUserIdLessThenZero_thenReturnException() {
         final FalseIdException exception1 = Assertions.assertThrows(
                 FalseIdException.class,
                 () -> ItemRequestServiceImpl.validationByUserId(-1L, mockUserService, log));

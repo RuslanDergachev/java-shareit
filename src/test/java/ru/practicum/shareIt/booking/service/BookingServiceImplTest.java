@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
 import org.springframework.data.domain.*;
 import ru.practicum.shareIt.booking.entity.Booking;
 import ru.practicum.shareIt.booking.entity.BookingDto;
@@ -37,10 +36,8 @@ class BookingServiceImplTest {
     private ItemService mockItemService;
     @Mock
     private UserService mockUserService;
-    @Mock
-    Logger log;
     @InjectMocks
-    BookingServiceImpl bookingService;
+    private BookingServiceImpl bookingService;
     private Item item = Item.builder()
             .id(1L)
             .name("Перфоратор электрический")
@@ -58,8 +55,8 @@ class BookingServiceImplTest {
             .build();
     private BookingDto bookingDto = BookingDto.builder()
             .id(1L)
-            .start(LocalDateTime.of(2022, 8, 28, 12, 10, 10))
-            .end(LocalDateTime.of(2022, 8, 29, 12, 10, 10))
+            .start(LocalDateTime.of(2022, 8, 31, 12, 10, 10))
+            .end(LocalDateTime.of(2022, 9, 3, 12, 10, 10))
             .itemId(1L)
             .build();
     private ItemDto itemDto = ItemDto.builder()
@@ -70,7 +67,7 @@ class BookingServiceImplTest {
             .build();
 
     @Test
-    void addNewBookingTest() {
+    void shouldReturnNewBookingTest() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -174,7 +171,7 @@ class BookingServiceImplTest {
 
 
     @Test
-    void updateBookingTest() {
+    void shouldReturnUpdateBookingTest() {
         Item item1 = Item.builder()
                 .id(1L)
                 .name("Перфоратор электрический")
@@ -214,7 +211,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void updateBookingStatusTest() {
+    void shouldReturnUpdateBookingStatusTest() {
         Item item1 = Item.builder()
                 .id(1L)
                 .name("Перфоратор электрический")
@@ -327,7 +324,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdTest() {
+    void shouldReturnBookingByIdTest() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -339,7 +336,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdAndBookerIdTest() {
+    void shouldReturnBookingByIdAndBookerIdTest() {
         Mockito
                 .when(mockUserService.getUser(Mockito.eq(1L)))
                 .thenReturn(new User(1L, "Ivan", "user@email.ru"));
@@ -396,14 +393,14 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStateCurrentTest() {
+    void shouldReturnBookingsWithStateCurrentTest() {
         String state = "CURRENT";
         int from = 0;
         int size = 20;
         Booking booking1 = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 25, 12, 10, 10))
-                .end(LocalDateTime.of(2022, 8, 28, 13, 10, 10))
+                .end(LocalDateTime.of(2022, 9, 5, 13, 10, 10))
                 .bookerId(1L)
                 .status(BookingStatus.REJECTED)
                 .item(item)
@@ -425,7 +422,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStateWaitingTest() {
+    void shouldReturnBookingsWithStateWaitingTest() {
         String state = "WAITING";
         int from = 0;
         int size = 20;
@@ -453,7 +450,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStateRejectedTest() {
+    void shouldReturnBookingsWithStateRejectedTest() {
         String state = "REJECTED";
         int from = 0;
         int size = 20;
@@ -481,7 +478,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStatePastTest() {
+    void shouldReturnBookingsWithStatePastTest() {
         String state = "PAST";
         int from = 0;
         int size = 20;
@@ -509,7 +506,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStateFutureTest() {
+    void shouldReturnBookingsWithStateFutureTest() {
         String state = "FUTURE";
         int from = 0;
         int size = 20;
@@ -537,7 +534,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingsWithStateFutureAndStatusWaitingTest() {
+    void shouldReturnBookingsWithStateFutureAndStatusWaitingTest() {
         String state = "FUTURE";
         int from = 0;
         int size = 20;
@@ -594,14 +591,14 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsCurrentTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsCurrentTest() {
         String state = "CURRENT";
         int from = 0;
         int size = 20;
         Booking booking1 = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 25, 12, 10, 10))
-                .end(LocalDateTime.of(2022, 8, 28, 13, 10, 10))
+                .end(LocalDateTime.of(2022, 9, 5, 13, 10, 10))
                 .bookerId(1L)
                 .status(BookingStatus.REJECTED)
                 .item(item)
@@ -622,7 +619,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsWaitingTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsWaitingTest() {
         String state = "WAITING";
         int from = 0;
         int size = 20;
@@ -650,7 +647,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsRejectedTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsRejectedTest() {
         String state = "REJECTED";
         int from = 0;
         int size = 20;
@@ -678,7 +675,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsApprovedTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsApprovedTest() {
         String state = "PAST";
         int from = 0;
         int size = 20;
@@ -706,7 +703,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsFutureAndRejectedTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsFutureAndRejectedTest() {
         String state = "FUTURE";
         int from = 0;
         int size = 20;
@@ -734,7 +731,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void getBookingByIdByOwnerAndStatusIsAllTest() {
+    void shouldReturnBookingByIdByOwnerAndStatusIsAllTest() {
         String state = "ALL";
         int from = 0;
         int size = 20;
@@ -796,14 +793,14 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void deleteBookingTest() {
+    void shouldDeleteBookingTest() {
         bookingService.deleteBooking(1L, 1L);
         Mockito.verify(mockBookingRepository, Mockito.times(1))
                 .deleteBookingById(1L);
     }
 
     @Test
-    void validationByUserIdLessThenZero() {
+    void whenByUserIdLessThenZero_thenReturnException() {
         final FalseIdException exception = Assertions.assertThrows(
                 FalseIdException.class,
                 () -> bookingService.validationUserIdAndBookingId(-1L, 1L));
@@ -811,7 +808,7 @@ class BookingServiceImplTest {
     }
 
     @Test
-    void validationByBookingIdLessThenZero() {
+    void whenByBookingIdLessThenZero_thenReturnException() {
         final FalseIdException exception = Assertions.assertThrows(
                 FalseIdException.class,
                 () -> bookingService.validationUserIdAndBookingId(1L, -1L));

@@ -29,27 +29,27 @@ class RequestControllerTest {
     @MockBean
     private ItemRequestService itemRequestService;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
     @Autowired
     private MockMvc mvc;
-    private ItemRequestDto itemRequestDto = new ItemRequestDto(
+    private final ItemRequestDto itemRequestDto = new ItemRequestDto(
             1L,
             "перфоратор электрический",
             1L,
             null,
             null
     );
-    private ItemRequestDto itemRequestDto1 = new ItemRequestDto(
+    private final ItemRequestDto itemRequestDto1 = new ItemRequestDto(
             2L,
             "дрель аккумуляторная",
             1L,
             null,
             null
     );
-    private List<ItemRequestDto> itemRequestDtoList = List.of(itemRequestDto, itemRequestDto1);
+    private final List<ItemRequestDto> itemRequestDtoList = List.of(itemRequestDto, itemRequestDto1);
 
     @Test
-    void addNewItemRequest() throws Exception {
+    void shouldReturnNewItemRequest() throws Exception {
         when(itemRequestService.addNewItemRequest(anyLong(), any()))
                 .thenReturn(itemRequestDto);
         mvc.perform(post("/requests")
@@ -67,7 +67,7 @@ class RequestControllerTest {
     }
 
     @Test
-    void getListItemRequestDtoByUserIdTest() throws Exception {
+    void shouldReturnListItemRequestDtoByUserIdTest() throws Exception {
         when(itemRequestService.getItemRequests(1L))
                 .thenReturn(itemRequestDtoList);
         mvc.perform(get("/requests")
@@ -78,7 +78,7 @@ class RequestControllerTest {
     }
 
     @Test
-    void getAllItemRequestDtoWithPage() throws Exception {
+    void shouldReturnAllItemRequestDtoWithPage() throws Exception {
         when(itemRequestService.getAllItemRequests(1L, 0, 1))
                 .thenReturn(itemRequestDtoList);
         mvc.perform(get("/requests/all")
@@ -91,7 +91,7 @@ class RequestControllerTest {
     }
 
     @Test
-    void getRequestById() throws Exception {
+    void shouldReturnRequestById() throws Exception {
         when(itemRequestService.getRequestById(1L, 2L))
                 .thenReturn(itemRequestDto1);
         mvc.perform(get("/requests/2")

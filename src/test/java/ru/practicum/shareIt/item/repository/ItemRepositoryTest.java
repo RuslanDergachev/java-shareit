@@ -30,7 +30,7 @@ class ItemRepositoryTest {
     private EntityManager entityManager;
     @Autowired
     private ItemRepository itemRepository;
-    private Item item = Item.builder()
+    private final Item item = Item.builder()
             .name("Дрель электрическая")
             .description("Mocito")
             .available(true)
@@ -39,7 +39,7 @@ class ItemRepositoryTest {
             .build();
 
     @Test
-    void searchItemByText() {
+    void shouldReturnItemByText() {
         int from = 0;
         int size = 1;
         String text = "Дрель";
@@ -55,7 +55,7 @@ class ItemRepositoryTest {
     }
 
     @Test
-    void getItemsByRequestId() {
+    void shouldReturnItemsByRequestId() {
         itemRepository.save(item);
         List<Item> items = itemRepository.getItemsByRequestId(1L);
 
