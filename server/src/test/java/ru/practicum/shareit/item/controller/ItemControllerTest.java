@@ -11,7 +11,6 @@ import ru.practicum.shareit.booking.entity.LastBooking;
 import ru.practicum.shareit.booking.entity.NextBooking;
 import ru.practicum.shareit.comments.entity.CommentDto;
 import ru.practicum.shareit.comments.service.CommentService;
-import ru.practicum.shareit.item.entity.Item;
 import ru.practicum.shareit.item.entity.ItemDto;
 import ru.practicum.shareit.item.entity.ItemMapper;
 import ru.practicum.shareit.item.service.ItemService;
