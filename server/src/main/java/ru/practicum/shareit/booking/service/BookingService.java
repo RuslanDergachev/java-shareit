@@ -1,9 +1,11 @@
 package ru.practicum.shareit.booking.service;
 
+import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.entity.BookingDto;
 import ru.practicum.shareit.booking.entity.BookingUpdateDto;
 
 import java.util.List;
+
 
 public interface BookingService {
 

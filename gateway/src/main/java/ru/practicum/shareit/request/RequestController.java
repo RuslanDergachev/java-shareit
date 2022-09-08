@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.request.dto.RequestDto;
+import ru.practicum.shareit.validation.ValidationMetods;
 
 import javax.validation.Valid;
 
@@ -24,26 +25,33 @@ public class RequestController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> add(@RequestHeader(USER_HEADER) long userId,
                                       @Valid @RequestBody RequestDto requestDto) {
+        ValidationMetods.validationId(userId);
+        ValidationMetods.validationRequest(userId, requestDto);
         log.debug("Добавлен запрос вещи: {}", requestDto);
         return requestClient.addNewRequest(userId, requestDto);
     }
 
     @GetMapping()
     public ResponseEntity<Object> get(@RequestHeader(USER_HEADER) long userId) {
+        ValidationMetods.validationId(userId);
         log.debug("Получен список запросов пользователя {} на поиск вещей для бронирования", userId);
         return requestClient.getRequests(userId);
     }
 
     @GetMapping("/all")
     public ResponseEntity<Object> getAll(@RequestHeader(USER_HEADER) long userId,
-                                  @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
-                                  @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
+                                @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
+                                @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
+        ValidationMetods.validationId(userId);
         log.debug("Получен список всех запросов");
         return requestClient.getAllItemRequests(userId, from, size);
     }
 
     @GetMapping("/{requestId}")
-    public ResponseEntity<Object> getRequestById(@RequestHeader(USER_HEADER) long userId, @PathVariable long requestId) {
+    public ResponseEntity<Object> getRequestById(@RequestHeader(USER_HEADER) long userId,
+                                                 @PathVariable long requestId) {
+        ValidationMetods.validationId(userId);
+        ValidationMetods.validationId(requestId);
         log.debug("Получен список всех запросов");
         return requestClient.getRequestById(userId, requestId);
     }

@@ -1,5 +1,6 @@
 package ru.practicum.shareit.booking.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +29,11 @@ import static java.util.Comparator.comparing;
 @Slf4j
 @Service
 public class BookingServiceImpl implements BookingService {
-    private BookingRepository bookingRepository;
-    private ItemService itemService;
-    private UserService userService;
+    private final BookingRepository bookingRepository;
+    private final ItemService itemService;
+    private final UserService userService;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, ItemService itemService,
-                              UserService userService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, ItemService itemService, UserService userService) {
         this.bookingRepository = bookingRepository;
         this.itemService = itemService;
         this.userService = userService;
