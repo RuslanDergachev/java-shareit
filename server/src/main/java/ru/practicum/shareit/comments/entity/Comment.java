@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments", schema = "public")
-@Getter
-@Setter
-@ToString
+@Data
 @DynamicUpdate
 @Builder
 @AllArgsConstructor
@@ -20,23 +18,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String text;
+    private String text;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
-    Item item;
-    Long authorId;
-    LocalDateTime created;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Comment)) return false;
-        return id != null && id.equals(((Comment) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
-
+    private Item item;
+    private Long authorId;
+    private LocalDateTime created;
 }

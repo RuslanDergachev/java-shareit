@@ -39,7 +39,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
     public ItemRequestDto addNewItemRequest(long userId, ItemRequestDto itemRequestDto) {
         validationByUserId(userId, userService, log);
         if (itemRequestDto.getDescription() == null) {
-            log.info("Запрос пользователя {} пустой", userId);
+            log.warn("Запрос пользователя {} пустой", userId);
             throw new ValidationException("Запрос пользователя ID " + userId + " пустой");
         }
         ItemRequest itemRequest = ItemRequestMapper.toItemRequest(userId, itemRequestDto);
@@ -66,7 +66,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
             throw new ValidationException("Параметр from не может быть меньше 0");
         }
         if (size <= 0) {
-            log.info("Параметр size не может быть меньше или равен 0 и равен {}", size);
+            log.warn("Параметр size не может быть меньше или равен 0 и равен {}", size);
             throw new ValidationException("Параметр size не может быть меньше или равен 0");
         }
         Pageable pageable = PageRequest.of(from, size, Sort.by("id").descending());
@@ -82,11 +82,11 @@ public class ItemRequestServiceImpl implements ItemRequestService {
     public ItemRequestDto getRequestById(long userId, long requestId) {
         validationByUserId(userId, userService, log);
         if (requestId <= 0) {
-            log.info("ID запроса {} меньше или равно 0", requestId);
+            log.warn("ID запроса {} меньше или равно 0", requestId);
             throw new ValidationException("ID запроса меньше или равно 0");
         }
         if (itemRequestRepository.findItemRequestsById(requestId) == null) {
-            log.info("Запроса с ID {} не существует", requestId);
+            log.warn("Запроса с ID {} не существует", requestId);
             throw new NotFoundException("Запроса с ID " + requestId + " не существует");
         }
         ItemRequestDto itemRequestDto = ItemRequestMapper
@@ -98,11 +98,11 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
     public static void validationByUserId(long userId, UserService userService, Logger log) {
         if (userId <= 0) {
-            log.debug("ID пользователя меньше или равно 0");
+            log.warn("ID пользователя меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         if (userService.getUser(userId) == null) {
-            log.info("Пользователя {} не существует", userId);
+            log.warn("Пользователя {} не существует", userId);
             throw new NotFoundException("Пользователя ID " + userId + " не существует");
         }
     }

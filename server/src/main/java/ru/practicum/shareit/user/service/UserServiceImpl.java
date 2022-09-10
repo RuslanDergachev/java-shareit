@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User createUser(User user) {
         if (user.getName() == null) {
-            log.info("Имя пользователя отсутствует");
+            log.warn("Имя пользователя отсутствует");
             throw new ValidationException("Нет имени пользователя");
         }
         if (user.getEmail() == null) {
-            log.info("У пользователя отсутствует email");
+            log.warn("У пользователя отсутствует email");
             throw new ValidationException("Нет адреса почты пользователя");
         }
         if(user.getId() == 0){
@@ -76,8 +76,8 @@ public class UserServiceImpl implements UserService {
 
     private void validationUserId(long userId) {
         if (userId <= 0) {
-            log.info("ID пользователя равен 0");
-            throw new NullPointerException("ID пользователя равен 0");
+            log.warn("ID пользователя меньше или равен 0");
+            throw new NullPointerException("ID пользователя меньше или равен 0");
         }
     }
 }

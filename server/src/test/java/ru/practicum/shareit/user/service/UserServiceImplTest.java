@@ -113,6 +113,6 @@ class UserServiceImplTest {
                 NullPointerException.class,
                 () -> userService.removeUser(-1L));
 
-        Assertions.assertEquals("ID пользователя равен 0", exception.getMessage());
+        Assertions.assertEquals("ID пользователя меньше или равен 0", exception.getMessage());
     }
 }

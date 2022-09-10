@@ -55,8 +55,8 @@ class BookingServiceImplTest {
             .build();
     private BookingDto bookingDto = BookingDto.builder()
             .id(1L)
-            .start(LocalDateTime.of(2022, 9, 10, 12, 10, 10))
-            .end(LocalDateTime.of(2022, 9, 11, 12, 10, 10))
+            .start(LocalDateTime.of(2022, 9, 15, 12, 10, 10))
+            .end(LocalDateTime.of(2022, 9, 20, 12, 10, 10))
             .itemId(1L)
             .build();
     private ItemDto itemDto = ItemDto.builder()
@@ -400,7 +400,7 @@ class BookingServiceImplTest {
         Booking booking1 = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 25, 12, 10, 10))
-                .end(LocalDateTime.of(2022, 9, 10, 13, 10, 10))
+                .end(LocalDateTime.of(2022, 9, 15, 13, 10, 10))
                 .bookerId(1L)
                 .status(BookingStatus.REJECTED)
                 .item(item)
@@ -598,7 +598,7 @@ class BookingServiceImplTest {
         Booking booking1 = Booking.builder()
                 .id(1L)
                 .start(LocalDateTime.of(2022, 8, 25, 12, 10, 10))
-                .end(LocalDateTime.of(2022, 9, 10, 13, 10, 10))
+                .end(LocalDateTime.of(2022, 9, 15, 13, 10, 10))
                 .bookerId(1L)
                 .status(BookingStatus.REJECTED)
                 .item(item)

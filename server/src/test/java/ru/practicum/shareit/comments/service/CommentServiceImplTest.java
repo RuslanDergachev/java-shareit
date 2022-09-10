@@ -109,8 +109,8 @@ class CommentServiceImplTest {
     void whenBookingDateStartAfterNow_thenReturnException() {
         Booking booking = Booking.builder()
                 .id(1L)
-                .start(LocalDateTime.of(2022, 9, 10, 12, 10, 10))
-                .end(LocalDateTime.of(2022, 9, 10, 13, 10, 10))
+                .start(LocalDateTime.of(2022, 9, 15, 12, 10, 10))
+                .end(LocalDateTime.of(2022, 9, 15, 13, 10, 10))
                 .bookerId(1L)
                 .build();
 

@@ -8,9 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "items", schema = "public")
-@Getter
-@Setter
-@ToString
+@Data
 @DynamicUpdate
 @Builder
 @AllArgsConstructor
@@ -26,16 +24,4 @@ public class Item {
     private Long ownerId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long requestId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Item)) return false;
-        return id != null && id.equals(((Item) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

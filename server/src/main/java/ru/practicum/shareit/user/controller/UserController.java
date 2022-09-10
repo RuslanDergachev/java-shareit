@@ -27,20 +27,20 @@ public class UserController {
 
     @GetMapping
     public Collection<User> getUsers() {
-        log.debug("Текущее количество пользователей: {}", userService.getUsers().size());
+        log.info("Текущее количество пользователей: {}", userService.getUsers().size());
         return userService.getUsers();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@Valid @RequestBody UserDto userDto) {
-        log.debug("Добавлен пользователь: {}", userDto);
+        log.info("Добавлен пользователь: {}", userDto);
         return UserMapper.toUserDto(userService.createUser(UserMapper.toUser(userDto)));
     }
 
     @PatchMapping(value = "/{id}")
     public UserDto update(@PathVariable long id, @RequestBody UserDto userDto) {
-        log.debug("Обновлён пользователь: {}", userDto);
+        log.info("Обновлён пользователь: {}", userDto);
         return userService.updateUser(id, UserMapper.toUser(userDto));
     }
 
@@ -52,6 +52,7 @@ public class UserController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void removeUser(@PathVariable long id) {
+        log.info("Удален пользователь {}", id);
         userService.removeUser(id);
     }
 }

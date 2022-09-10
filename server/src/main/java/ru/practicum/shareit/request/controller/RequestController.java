@@ -25,13 +25,13 @@ public class RequestController {
     @ResponseStatus(HttpStatus.OK)
     public ItemRequestDto add(@RequestHeader(USER_HEADER) long userId,
                               @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        log.debug("Добавлен запрос вещи: {}", itemRequestDto);
+        log.info("Добавлен запрос вещи: {}", itemRequestDto);
         return itemRequestService.addNewItemRequest(userId, itemRequestDto);
     }
 
     @GetMapping()
     public List<ItemRequestDto> get(@RequestHeader(USER_HEADER) long userId) {
-        log.debug("Получен список запросов пользователя {} на поиск вещей для бронирования", userId);
+        log.info("Получен список запросов пользователя {} на поиск вещей для бронирования", userId);
         return itemRequestService.getItemRequests(userId);
     }
 
@@ -39,13 +39,13 @@ public class RequestController {
     public List<ItemRequestDto> getAll(@RequestHeader(USER_HEADER) long userId,
                                        @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
                                        @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
-        log.debug("Получен список всех запросов");
+        log.info("Получен список всех запросов");
         return itemRequestService.getAllItemRequests(userId, from, size);
     }
 
     @GetMapping("/{requestId}")
     public ItemRequestDto getRequestById(@RequestHeader(USER_HEADER) long userId, @PathVariable long requestId) {
-        log.debug("Получен список всех запросов");
+        log.info("Получен список всех запросов");
         return itemRequestService.getRequestById(userId, requestId);
     }
 }

@@ -42,10 +42,12 @@ public class CommentServiceImpl implements CommentService {
                 .filter(booking -> booking.getBookerId() == userId)
                 .sorted(comparing(Booking::getStart)).collect(Collectors.toList());
         if (bookingUser.size() == 0) {
+            log.warn("Пользователь не бронировал вещь{}", itemId);
             throw new NotFoundException("Пользователь не бронировал вещь");
         }
         for (Booking booking : bookingUser) {
             if (booking.getStart().isAfter(LocalDateTime.now().withNano(0))) {
+                log.warn("Отзыв нельзя оставить до начала пользования вещью");
                 throw new ValidationException("Отзыв нельзя оставить до начала пользования вещью");
             } else {
                 break;

@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.validation.ValidationMetods;
+import ru.practicum.shareit.validation.Validation;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -27,22 +27,21 @@ public class BookingController {
     @PatchMapping("/{bookingId}")
     public ResponseEntity<Object> update(@RequestHeader(USER_HEADER) long userId, @PathVariable long bookingId,
                                          @RequestParam Boolean approved) {
-
         if (approved == null) {
             throw new NotFoundException("Статус бронирования отсутствует");
         }
-        ValidationMetods.validationId(userId);
-        ValidationMetods.validationId(bookingId);
+        Validation.validateId(userId);
+        Validation.validateId(bookingId);
         log.debug("Обновлено бронирование: {}", bookingId);
         return bookingClient.updateBooking(userId, bookingId, approved);
     }
 
     @GetMapping("/owner")
     public ResponseEntity<Object> getBookingByIdByOwner(@RequestHeader(USER_HEADER) long userId,
-             @RequestParam(value = "state", required = false, defaultValue = "ALL") String state,
-             @PositiveOrZero @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
-             @Positive @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
-        ValidationMetods.validationId(userId);
+             @RequestParam(required = false, defaultValue = "ALL") String state,
+             @PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer from,
+             @Positive @RequestParam(required = false, defaultValue = "20") Integer size) {
+        Validation.validateId(userId);
         log.debug("Получен запрос бронирования вещи пользователя {}", userId);
         return bookingClient.getBookingByIdByOwner(userId, state, from, size);
     }
@@ -50,18 +49,18 @@ public class BookingController {
     @DeleteMapping("/{bookingId}")
     public void deleteBooking(@RequestHeader(USER_HEADER) long userId,
                               @PathVariable long bookingId) {
-        ValidationMetods.validationId(userId);
-        ValidationMetods.validationId(bookingId);
+        Validation.validateId(userId);
+        Validation.validateId(bookingId);
         log.debug("Получен запрос на удаление бронирования ID {}", bookingId);
         bookingClient.deleteBooking(userId, bookingId);
     }
 
     @GetMapping
     public ResponseEntity<Object> getBookings(@RequestHeader(USER_HEADER) long userId,
-                                  @RequestParam(name = "state", defaultValue = "ALL") String state,
-                                  @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
-                                  @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        ValidationMetods.validationId(userId);
+                                  @RequestParam(defaultValue = "ALL") String state,
+                                  @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+                                  @Positive @RequestParam(defaultValue = "10") Integer size) {
+        Validation.validateId(userId);
         log.info("Get booking with state {}, userId={}, from={}, size={}", state, userId, from, size);
         return bookingClient.getBookings(userId, state, from, size);
     }
@@ -69,9 +68,9 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<Object> addNewBookingItem(@RequestHeader(USER_HEADER) long userId,
                                                     @RequestBody @Valid BookingDto bookingDto) {
-        ValidationMetods.validationId(userId);
+        Validation.validateId(userId);
         if (bookingDto == null) {
-            log.debug("Запрос на бронирование отсутствует");
+            log.warn("Запрос на бронирование отсутствует");
             throw new NotFoundException("Запрос на бронирование отсутствует");
         }
         log.info("Creating booking {}, userId={}", bookingDto, userId);
@@ -81,8 +80,8 @@ public class BookingController {
     @GetMapping("/{bookingId}")
     public ResponseEntity<Object> getBooking(@RequestHeader(USER_HEADER) long userId,
                                              @PathVariable Long bookingId) {
-        ValidationMetods.validationId(userId);
-        ValidationMetods.validationId(bookingId);
+        Validation.validateId(userId);
+        Validation.validateId(bookingId);
         log.info("Get booking {}, userId={}", bookingId, userId);
         return bookingClient.getBooking(userId, bookingId);
     }

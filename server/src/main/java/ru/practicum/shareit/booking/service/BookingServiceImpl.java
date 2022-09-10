@@ -44,7 +44,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto addNewBooking(long userId, BookingDto bookingDto) {
         validationUserId(userId);
         if (bookingDto == null) {
-            log.debug("Запрос на бронирование отсутствует");
+            log.warn("Запрос на бронирование отсутствует");
             throw new NotFoundException("Запрос на бронирование отсутствует");
         }
         if (itemService.getItemById(userId, bookingDto.getItemId()) == null) {
@@ -240,19 +240,19 @@ public class BookingServiceImpl implements BookingService {
 
     public void validationUserIdAndBookingId(long userId, long bookingId) {
         if (userId <= 0) {
-            log.debug("ID пользователя меньше или равно 0");
+            log.warn("ID пользователя меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         if (bookingId <= 0) {
-            log.debug("ID бронирования меньше или равно 0");
+            log.warn("ID бронирования меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         if (userService.getUser(userId) == null) {
-            log.info("Пользователя {} не существует", userId);
+            log.warn("Пользователя {} не существует", userId);
             throw new NotFoundException("Пользователя ID " + userId + " не существует");
         }
         if (bookingRepository.getBookingById(bookingId) == null) {
-            log.info("Бронь {} не существует", bookingId);
+            log.warn("Бронь {} не существует", bookingId);
             throw new NotFoundException("Бронь ID " + bookingId + " не существует");
         }
     }
@@ -263,11 +263,11 @@ public class BookingServiceImpl implements BookingService {
 
     public void validationPage(int from, int size) {
         if (from < 0) {
-            log.info("Параметр from не может быть меньше 0 и равен {}", from);
+            log.warn("Параметр from не может быть меньше 0 и равен {}", from);
             throw new ValidationException("Параметр from не может быть меньше 0");
         }
         if (size <= 0) {
-            log.info("Параметр size не может быть меньше или равен 0 и равен {}", size);
+            log.warn("Параметр size не может быть меньше или равен 0 и равен {}", size);
             throw new ValidationException("Параметр size не может быть меньше или равен 0");
         }
     }

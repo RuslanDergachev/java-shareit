@@ -27,20 +27,20 @@ public class BookingController {
     @ResponseStatus(HttpStatus.CREATED)
     public BookingDto add(@RequestHeader(USER_HEADER) long userId,
                           @Valid @RequestBody BookingDto bookingDto) {
-        log.debug("Добавлен запрос на бронирование: {}", bookingDto);
+        log.info("Добавлен запрос на бронирование: {}", bookingDto);
         return bookingService.addNewBooking(userId, bookingDto);
     }
 
     @PatchMapping("/{bookingId}")
     public BookingUpdateDto update(@RequestHeader(USER_HEADER) long userId, @PathVariable long bookingId,
                                    @RequestParam String approved) {
-        log.debug("Обновлено бронирование: {}", bookingId);
+        log.info("Обновлено бронирование: {}", bookingId);
         return bookingService.updateBooking(userId, bookingId, approved);
     }
 
     @GetMapping("/{bookingId}")
     public BookingUpdateDto getBookingById(@RequestHeader(USER_HEADER) long userId, @PathVariable long bookingId) {
-        log.debug("Получен запрос бронирования вещи ID {}", bookingId);
+        log.info("Получен запрос бронирования вещи ID {}", bookingId);
         return bookingService.getBookingByIdAndBookerId(userId, bookingId);
     }
 
@@ -49,7 +49,7 @@ public class BookingController {
                                       @RequestParam(value = "state", required = false) String state,
                                       @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
                                       @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
-        log.debug("Получен запрос бронирований пользователя {}", userId);
+        log.info("Получен запрос бронирований пользователя {}", userId);
         return bookingService.getBookings(userId, state, from, size);
     }
 
@@ -58,14 +58,14 @@ public class BookingController {
                                      @RequestParam(value = "state", required = false) String state,
                                      @RequestParam(value = "from", required = false, defaultValue = "0") Integer from,
                                      @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
-        log.debug("Получен запрос бронирования вещи пользователя {}", userId);
+        log.info("Получен запрос бронирования вещи пользователя {}", userId);
         return bookingService.getBookingByIdByOwner(userId, state, from, size);
     }
 
     @DeleteMapping("/{bookingId}")
     public void deleteBooking(@RequestHeader(USER_HEADER) long userId,
                               @PathVariable long bookingId) {
-        log.debug("Получен запрос на удаление бронирования ID {}", bookingId);
+        log.info("Получен запрос на удаление бронирования ID {}", bookingId);
         bookingService.deleteBooking(userId, bookingId);
     }
 }

@@ -47,18 +47,19 @@ public class ItemServiceImpl implements ItemService {
     public ItemDto addNewItem(long userId, ItemDto itemDto) {
         validationUserId(userId);
         if (userService.getUser(userId) == null) {
+            log.warn("Пользователя с ID {} не существует", userId);
             throw new FalseIdException("Пользователя с ID " + userId + " не существует");
         }
         if (itemDto.getName() == null || itemDto.getName().isEmpty()) {
-            log.info("Нет наименования вещи");
+            log.warn("Нет наименования вещи");
             throw new ValidationException("Нет наименования вещи");
         }
         if (itemDto.getDescription() == null) {
-            log.info("Нет описания вещи");
+            log.warn("Нет описания вещи");
             throw new ValidationException("Нет описания вещи");
         }
         if (itemDto.getAvailable() == null) {
-            log.info("Нет статуса доступности вещи");
+            log.warn("Нет статуса доступности вещи");
             throw new ValidationException("Отсутствует статус доступности вещи");
         }
         Item item = ItemMapper.toItem(userId, itemDto);
@@ -69,7 +70,7 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItem(long userId, long itemId) {
         validationUserId(userId);
         if (itemId <= 0) {
-            log.info("ID вещи меньше или равно 0");
+            log.warn("ID вещи меньше или равно 0");
             throw new FalseIdException("ID вещи меньше или равно 0");
         }
         itemRepository.deleteById(itemId);
@@ -80,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
         Pageable pageable = PageRequest.of(from, size, Sort.by("id"));
 
         if (search.isEmpty()) {
-            log.info("Строка поиска пустая");
+            log.warn("Строка поиска пустая");
             return Collections.emptyList();
         }
         return itemRepository.search(search, pageable).stream()
@@ -91,11 +92,11 @@ public class ItemServiceImpl implements ItemService {
     public ItemDto getItemById(long userId, long itemId) {
         validationUserId(userId);
         if (itemId <= 0) {
-            log.info("ID меньше или равно 0");
+            log.warn("ID меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         if (itemRepository.getItemById(itemId) == null) {
-            log.info("Вещь {} не найдена", itemId);
+            log.warn("Вещь {} не найдена", itemId);
             throw new NotFoundException("Вещь ID " + itemId + " не найдена");
         }
         List<Booking> booking = getBookingByItemIdByStart(itemId);
@@ -151,6 +152,7 @@ public class ItemServiceImpl implements ItemService {
 
     public List<Item> getItemsByRequestId(long requestId) {
         if (requestId <= 0) {
+            log.warn("ID меньше или равно 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
         List<Item> items = itemRepository.getItemsByRequestId(requestId);
@@ -169,11 +171,11 @@ public class ItemServiceImpl implements ItemService {
         }
         validationUserId(userId);
         if (userService.getUser(userId) == null) {
-            log.info("Пользователь {} не существует", userId);
+            log.warn("Пользователь {} не существует", userId);
             throw new FalseIdException("Пользователь " + userId + " не существует");
         }
         if (!userId.equals(newItem.getOwnerId())) {
-            log.info("Пользователь {} не вляется владельцем вещи {}", userId, item.getId());
+            log.warn("Пользователь {} не вляется владельцем вещи {}", userId, item.getId());
             throw new NotFoundException("Пользователь " + userId + " не является владельцем вещи "
                     + item.getId() + " " + item.getName());
         }
@@ -191,7 +193,7 @@ public class ItemServiceImpl implements ItemService {
 
     public static void validationUserId(long userId) {
         if (userId <= 0) {
-            log.info("ID пользователя равен 0");
+            log.warn("ID пользователя равен 0");
             throw new FalseIdException("ID меньше или равно 0");
         }
     }

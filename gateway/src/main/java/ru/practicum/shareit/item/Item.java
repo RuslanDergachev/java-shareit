@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@ToString
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
@@ -21,16 +21,4 @@ public class Item {
     private Long ownerId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long requestId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Item)) return false;
-        return id != null && id.equals(((Item) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
